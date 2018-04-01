@@ -103,6 +103,33 @@ template <typename T> class Lista{
 		}
 };
 
+template <typename T> class Pilha{
+	public:
+        Pilha(int n){
+        	pilha = new T[n];
+			quant = n;
+			f = 0;	
+        }
+		T *pilha;
+		int quant;
+		int f;
+		
+		bool empilhar(T novo_elemento){
+			if(f == quant){
+				return false;
+			}
+			pilha[f++] = novo_elemento;
+			return true;
+		}
+		bool desempilhar(){
+			if(f == 0){
+				return false;
+			}
+			f--;
+			return true;
+		}
+};
+
 class Compromisso{
 	private:
 		string titulo;
@@ -218,29 +245,19 @@ bool operator==(Pessoa A, Pessoa B){
 }
 
 int main(){
-	Lista<Pessoa> lista;
-	No<Pessoa>* atual;
-	No<Compromisso>* comp_atual;
-	lista.inserir(Pessoa("Ana"));
-	lista.inserir(Pessoa("Maria"));
-	lista.inserir(Pessoa("Joao"));
-	atual = lista.primeiro;
-	lista.primeiro->n.agenda.inserir(Compromisso("Compromisso A1", 1, 1, 2000, "Local 1"));
-	lista.primeiro->prox->n.agenda.inserir(Compromisso("Compromisso B1", 2, 2, 2000, "Local 1"));
-	lista.primeiro->prox->n.agenda.inserir(Compromisso("Compromisso B2", 13, 6, 1999, "Local 2"));
-	lista.primeiro->prox->n.agenda.inserir(Compromisso("Compromisso B3", 10, 6, 1999, "Local 3"));
-	lista.primeiro->prox->prox->n.agenda.inserir(Compromisso("Compromisso C1", 3, 3, 2000, "Local 1"));
-	lista.primeiro->prox->prox->n.agenda.inserir(Compromisso("Compromisso C2", 22, 9, 2000, "Local 1"));
+	Pilha<Pessoa> pilha(10);
+	pilha.empilhar(Pessoa("Ana"));
+	pilha.empilhar(Pessoa("Maria"));
+	pilha.empilhar(Pessoa("Joao"));
+	pilha.empilhar(Pessoa("Jose"));
+	pilha.desempilhar();
 	
-	for(int i=0; i<lista.quant; i++){
-		cout<<atual->n.getNome()<<endl;
-		comp_atual = atual->n.agenda.primeiro;
-		for(int i=0; i<atual->n.agenda.quant; i++){
-			cout<<comp_atual->n.getTitulo()<<endl;
-			comp_atual = comp_atual->prox;
-		}
-		atual = atual->prox;
+	for(int i = 0; i<pilha.f; i++){
+		cout<<pilha.pilha[i].getNome()<<endl;
 	}
+	pilha.pilha[0].agenda.inserir(Compromisso("Compromisso 1",2,2,1999,"AAA"));
+	cout<<pilha.pilha[0].agenda.primeiro->n.getTitulo()<<endl;
+	
 	
 	system("pause");
 	return 0;
