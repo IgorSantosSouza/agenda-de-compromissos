@@ -99,6 +99,17 @@ template <typename T> class Lista{
             }
             return NULL;
         }
+
+        No<T>* busca_por_index(int index){
+            No<T>* A = primeiro;
+            for(int i=0; i<index; i++){
+                if(A == NULL){
+                    return A;
+                }
+                A = A->prox;
+            }
+            return A;
+        }
 };
 
 template <typename T> class Pilha{

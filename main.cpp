@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    Pilha<Pessoa> pessoas(10);
 
     return a.exec();
     system("pause");

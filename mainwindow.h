@@ -25,6 +25,10 @@ private slots:
 
     void on_listWidget_itemClicked(QListWidgetItem *item);
 
+    void on_pushButton_clicked();
+
+    void on_compList_itemClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
 };
